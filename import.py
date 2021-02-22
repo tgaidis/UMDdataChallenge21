@@ -81,28 +81,22 @@ def linkBuilder(urlBase, datesList, indicatorList, countryList, linkList):
 
 linkBuilder(urlBase, datesList, indicatorList, countryList, linkList)
 
-dateList = linkList.copy()
-
-linkDF = DataFrame (linkList, columns = ['Country', 'Month', 'Day', 'Indicator', 'Link'])
+#linkDF = DataFrame (linkList, columns = ['Country', 'Month', 'Day', 'Indicator', 'Link'])
 #linkDF.to_csv('indicatorsandLinks.csv')
 
-tempList = []
+dateList = [x[:] for x in linkList]
 
 for i in dateList:
-    #x = i.copy()
     del i[4]
     del i[3]
-    #tempList.append(i)
 
-#print(len(tempList))
+#print(len(dateList[0]), len(linkList[0]))
 
-listToMerge = []
-
+iteratedList = []
 for i in dateList[::21]:
-    #j = i.copy()
-    listToMerge.append(i)
+    iteratedList.append(i)
 
-datesDF = DataFrame (listToMerge, columns = ['Country', 'Month', 'Day'])
+datesDF = DataFrame (iteratedList, columns = ['Country', 'Month', 'Day'])
 #print(len(datesDF))
 
 #print(datesDF)
@@ -744,4 +738,3 @@ finalDataset = pd.merge(datesDF, apiDataset, how = 'outer', on = 'x1')
 
 finalDataset.to_csv('allData.csv')
 print('Done')
-
