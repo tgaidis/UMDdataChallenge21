@@ -82,7 +82,7 @@ def linkBuilder(urlBase, datesList, indicatorList, countryList, linkList):
 linkBuilder(urlBase, datesList, indicatorList, countryList, linkList)
 
 linkDF = DataFrame (linkList, columns = ['Country', 'Month', 'Day', 'Indicator', 'Link'])
-#print(linkDF)
+print(len(linkDF))
 
 #datagrab functions
 def covidGrab(index1, printData):
@@ -554,7 +554,6 @@ showData = "False"
 
 for i in range(25000, 25500):
     tempRow = []
-    #tempRow.append()
 
     covid = covidGrab(counter, showData)
     tempRow.append(covid)
@@ -684,18 +683,36 @@ for i in range(25000, 25500):
 
     preDataFrame.append(tempRow)
 
-    print(tempRow)
+    #print(tempRow)
 
-print(preDataFrame)
+print(len(preDataFrame))
 
-largeDataset = DataFrame (preDataFrame, columns=['Country', 'Month', 'Day', 'CLI', 'CLI SS',
- 'Flu', 'Flu SS', 'Mask', 'Mask SS', 'Contact', 'Contact SS',
- 'Finance', 'Finance SS', 'Anosmia', 'Anosmia SS',
- 'Vaccine_acpt', 'Vaccine_acpt SS', 'Covid_Vaccine', 'Covid_Vaccine SS', 
- 'Trust_fam', 'Trust_fam SS', 'Trust_Healthcare', 'Trust_healthcare SS',
- 'Trust_who', 'Trust_who SS', 'Trust_govt', 'Trust_govt SS', 'Trust_politicians', 'Trust_politicians SS', 
- 'Twodoses', 'Twodoses SS', 'concerned_sideeffects', 'concerned_sideeffects SS',
- 'hesitant_sideeffects', 'hesitant_sideeffects SS', 'modified_acceptance', 'modified_acceptance SS',
- 'access_wash', 'access_wash SS', 'wash_hands_24h_3to6', 'wash_hands_24h_3to6 SS',
- 'wash_hands_24h_7orMore', 'wash_hands_24h_7orMore SS', 'cmty_covid', 'cmty_covid SS'] )
 
+apiDataset = DataFrame (preDataFrame, columns=[
+'CLI', 'CLI SS', 
+ 'Flu', 'Flu SS', 
+ 'Mask', 'Mask SS', 
+ 'Contact', 'Contact SS',
+ 'Finance', 'Finance SS', 
+ 'Anosmia', 'Anosmia SS',
+ 'Vaccine_acpt', 'Vaccine_acpt SS', 
+ 'Covid_Vaccine', 'Covid_Vaccine SS', 
+ 'Trust_fam', 'Trust_fam SS', 
+ 'Trust_Healthcare', 'Trust_healthcare SS',
+ 'Trust_who', 'Trust_who SS', 
+ 'Trust_govt', 'Trust_govt SS', 
+ 'Trust_politicians', 'Trust_politicians SS', 
+ 'Twodoses', 'Twodoses SS', 
+ 'concerned_sideeffects', 'concerned_sideeffects SS',
+ 'hesitant_sideeffects', 'hesitant_sideeffects SS', 
+ 'modified_acceptance', 'modified_acceptance SS',
+ 'access_wash', 'access_wash SS', 
+ 'wash_hands_24h_3to6', 'wash_hands_24h_3to6 SS',
+ 'wash_hands_24h_7orMore', 'wash_hands_24h_7orMore SS', 
+ 'cmty_covid', 'cmty_covid SS'
+ ] )
+
+
+finalDataset = pd.merge(linkDF, apiDataset, how = 'outer', on = 'x1')
+
+finalDataset.to_csv('allData.csv')
