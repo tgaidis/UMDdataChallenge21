@@ -81,8 +81,29 @@ def linkBuilder(urlBase, datesList, indicatorList, countryList, linkList):
 
 linkBuilder(urlBase, datesList, indicatorList, countryList, linkList)
 
+dateList = linkList.copy()
+
 linkDF = DataFrame (linkList, columns = ['Country', 'Month', 'Day', 'Indicator', 'Link'])
-print(len(linkDF))
+#linkDF.to_csv('indicatorsandLinks.csv')
+
+tempList = []
+for i in dateList:
+    x = i
+    del x[4]
+    del x[3]
+    tempList.append(x)
+
+#print(len(tempList))
+
+listToMerge = []
+
+for i in dateList[::21]:
+    j = i
+    listToMerge.append(i)
+
+datesDF = DataFrame (listToMerge, columns = ['Country', 'Month', 'Day'])
+#print(len(datesDF))
+print(dateList)
 
 #datagrab functions
 def covidGrab(index1, printData):
@@ -552,7 +573,7 @@ preDataFrame = []
 counter = 0
 showData = "False"
 
-for i in range(25000, 25500):
+for i in range(34048):
     tempRow = []
 
     covid = covidGrab(counter, showData)
@@ -683,9 +704,12 @@ for i in range(25000, 25500):
 
     preDataFrame.append(tempRow)
 
-    print(str(counter/715008) + "% Done")
+    print(str((counter/34048)*100) + "% Done")
 
 print(len(preDataFrame))
+
+if len(datesDF) == len(preDataFrame):
+    print("success.... Merging Data")
 
 
 apiDataset = DataFrame (preDataFrame, columns=[
@@ -713,7 +737,8 @@ apiDataset = DataFrame (preDataFrame, columns=[
  ] )
 
 
-finalDataset = pd.merge(linkDF, apiDataset, how = 'outer', on = 'x1')
+finalDataset = pd.merge(datesDF, apiDataset, how = 'outer', on = 'x1')
 
 finalDataset.to_csv('allData.csv')
 print('Done')
+
