@@ -87,23 +87,26 @@ linkDF = DataFrame (linkList, columns = ['Country', 'Month', 'Day', 'Indicator',
 #linkDF.to_csv('indicatorsandLinks.csv')
 
 tempList = []
+
 for i in dateList:
-    x = i
-    del x[4]
-    del x[3]
-    tempList.append(x)
+    #x = i.copy()
+    del i[4]
+    del i[3]
+    #tempList.append(i)
 
 #print(len(tempList))
 
 listToMerge = []
 
 for i in dateList[::21]:
-    j = i
+    #j = i.copy()
     listToMerge.append(i)
 
 datesDF = DataFrame (listToMerge, columns = ['Country', 'Month', 'Day'])
 #print(len(datesDF))
-print(dateList)
+
+#print(datesDF)
+
 
 #datagrab functions
 def covidGrab(index1, printData):
