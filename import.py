@@ -85,394 +85,606 @@ linkDF = DataFrame (linkList, columns = ['Country', 'Month', 'Day', 'Indicator',
 #print(linkDF)
 
 #datagrab functions
-def covidGrab(index1):
+def covidGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_cli"])
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_cli"])
+        except:
+            return None
 
-def covidGrabSS(index1):
+def covidGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size"])
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
 
-def fluGrab(index1):
+def fluGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_ili"])
+        except:
+            return None
 
-def fluGrabSS(index1):
+def fluGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size"])
-
-def maskGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def maskGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_mc"])
-
-def maskGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_mc"])
+        except:
+            return None
+            
+def maskGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_mc"])
-
-def contactGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size_mc"])
+        except:
+            return None
+            
+def contactGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_dc"])
-
-def contactGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_dc"])
+        except:
+            return None
+            
+def contactGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_dc"])
-
-def financeGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size_dc"])
+        except:
+            return None
+            
+def financeGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_hf"])
-
-def financeGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_hf"])
+        except:
+            return None
+            
+def financeGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_hf"])
-
-def anosmiaGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size_hf"])
+        except:
+            return None
+            
+def anosmiaGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_anos"])
-
-def anosmiaGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_anos"])
+        except:
+            return None
+            
+def anosmiaGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_anos"])
-
-def vaccine_acptGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size_anos"])
+        except:
+            return None
+            
+def vaccine_acptGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_vu"])
-
-def vaccine_acptGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_vu"])
+        except:
+            return None
+            
+def vaccine_acptGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_vu"])
-
-def covid_vaccineGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size_vu"])
+        except:
+            return None
+            
+def covid_vaccineGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def covid_vaccineGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_covid_vaccine"])
+        except:
+            return None
+            
+def covid_vaccineGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def trust_famGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def trust_famGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def trust_famGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_trust_fam"])
+        except:
+            return None
+            
+def trust_famGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def trust_healthcareGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def trust_healthcareGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def trust_healthcareGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_trust_healthcare"])
+        except:
+            return None
+            
+def trust_healthcareGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def trust_whoGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def trust_whoGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def trust_whoGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_trust_who"])
+        except:
+            return None
+            
+def trust_whoGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def trust_govtGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def trust_govtGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def trust_govtGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_trust_govt"])
+        except:
+            return None
+            
+def trust_govtGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def trust_politiciansGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def trust_politiciansGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def trust_politiciansGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_trust_politicians"])
+        except:
+            return None
+            
+def trust_politiciansGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def twodosesGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def twodosesGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def twodosesGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_twodoses"])
+        except:
+            return None
+            
+def twodosesGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def concerned_sideeffectsGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def concerned_sideeffectsGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def concerned_sideeffectsGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_concerned_sideeffects"])
+        except:
+            return None
+            
+def concerned_sideeffectsGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def hesitant_sideeffectsGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def hesitant_sideeffectsGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def hesitant_sideeffectsGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_hesitant_sideeffects"])
+        except:
+            return None
+            
+def hesitant_sideeffectsGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def modified_acceptanceGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size_hesitant_sideeffects"])
+        except:
+            return None
+            
+def modified_acceptanceGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_ili"])
-
-def modified_acceptanceGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_modified_acceptance"])
+        except:
+            return None
+            
+def modified_acceptanceGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size_ili"])
-
-def access_washGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def access_washGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_access_wash"])
-
-def access_washGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_access_wash"])
+        except:
+            return None
+            
+def access_washGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size"])
-
-def wash_hands_24h_3to6Grab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def wash_hands_24h_3to6Grab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_wash_hands_24h_3to6"])
-
-def wash_hands_24h_3to6GrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_wash_hands_24h_3to6"])
+        except:
+            return None
+            
+def wash_hands_24h_3to6GrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size"])
-
-def wash_hands_24h_7orMoreGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def wash_hands_24h_7orMoreGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_wash_hands_24h_7ormore"])
-
-def wash_hands_24h_7orMoreGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_wash_hands_24h_7ormore"])
+        except:
+            return None
+            
+def wash_hands_24h_7orMoreGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size"])
-
-def cmty_covidGrab(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
+def cmty_covidGrab(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["smoothed_community_cli"])
-
-def cmty_covidGrabSS(index1):
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["smoothed_community_cli"])
+        except:
+            return None
+            
+def cmty_covidGrabSS(index1, printData):
     response = requests.get(linkList[index1][4]).text
     jsonData = json.loads(response)
-    #print(jsonData)
-    return(jsonData["data"][0]["sample_size"])
-
+    if printData == "True":
+        print(jsonData)
+    else:
+        try:
+            return(jsonData["data"][0]["sample_size"])
+        except:
+            return None
+            
 
 preDataFrame = []
 counter = 0
-for i in range(10):
+showData = "False"
+
+for i in range(25000, 25500):
     tempRow = []
     #tempRow.append()
 
-    covid = covidGrab(counter)
+    covid = covidGrab(counter, showData)
     tempRow.append(covid)
-    covidSS = covidGrabSS(counter)
+    covidSS = covidGrabSS(counter, showData)
     tempRow.append(covidSS)
     counter += 1
 
-    flu = fluGrab(counter)
+    flu = fluGrab(counter, showData)
     tempRow.append(flu)
-    fluSS = fluGrabSS(counter)
+    fluSS = fluGrabSS(counter, showData)
     tempRow.append(fluSS)
     counter += 1
 
-    mask = maskGrab(counter)
+    mask = maskGrab(counter, showData)
     tempRow.append(mask)
-    maskSS = maskGrabSS(counter)
+    maskSS = maskGrabSS(counter, showData)
     tempRow.append(maskSS)
     counter += 1
 
-    contact = contactGrab(counter)
+    contact = contactGrab(counter, showData)
     tempRow.append(contact)
-    contactSS = contactGrabSS(counter)
+    contactSS = contactGrabSS(counter, showData)
     tempRow.append(contactSS)
     counter += 1
 
-    finance = financeGrab(counter)
+    finance = financeGrab(counter, showData)
     tempRow.append(finance)
-    financeSS = financeGrabSS(counter)
+    financeSS = financeGrabSS(counter, showData)
     tempRow.append(financeSS)
     counter += 1
 
-    anosmia = anosmiaGrab(counter)
+    anosmia = anosmiaGrab(counter, showData)
     tempRow.append(anosmia)
-    anosmiaSS = anosmiaGrabSS(counter)
+    anosmiaSS = anosmiaGrabSS(counter, showData)
     tempRow.append(anosmiaSS)
     counter += 1
 
-    vaccine_acpt = vaccine_acptGrab(counter)
+    vaccine_acpt = vaccine_acptGrab(counter, showData)
     tempRow.append(vaccine_acpt)
-    vaccine_acptSS = vaccine_acptGrabSS(counter)
+    vaccine_acptSS = vaccine_acptGrabSS(counter, showData)
     tempRow.append(vaccine_acptSS)
     counter += 1
 
-    covid_vaccine = covid_vaccineGrab(counter)
+    covid_vaccine = covid_vaccineGrab(counter, showData)
     tempRow.append(covid_vaccine)
-    covid_vaccineSS = covid_vaccineGrabSS(counter)
+    covid_vaccineSS = covid_vaccineGrabSS(counter, showData)
     tempRow.append(covid_vaccineSS)
     counter += 1
 
-    trust_fam = trust_famGrab(counter)
+    trust_fam = trust_famGrab(counter, showData)
     tempRow.append(trust_fam)
-    trust_famSS = trust_famGrabSS(counter)
+    trust_famSS = trust_famGrabSS(counter, showData)
     tempRow.append(trust_famSS)
     counter += 1
 
-    trust_healthcare = trust_healthcareGrab(counter)
+    trust_healthcare = trust_healthcareGrab(counter, showData)
     tempRow.append(trust_healthcare)
-    trust_healthcareSS = trust_healthcareGrabSS(counter)
+    trust_healthcareSS = trust_healthcareGrabSS(counter, showData)
     tempRow.append(trust_healthcareSS)
     counter += 1
 
-    trust_who = trust_whoGrab(counter)
+    trust_who = trust_whoGrab(counter, showData)
     tempRow.append(trust_who)
-    trust_whoSS = trust_whoGrabSS(counter)
+    trust_whoSS = trust_whoGrabSS(counter, showData)
     tempRow.append(trust_whoSS)
     counter += 1
 
-    trust_govt = trust_govtGrab(counter)
+    trust_govt = trust_govtGrab(counter, showData)
     tempRow.append(trust_govt)
-    trust_govtSS = trust_govtGrabSS(counter)
+    trust_govtSS = trust_govtGrabSS(counter, showData)
     tempRow.append(trust_govtSS)
     counter += 1
 
-    trust_politicians = trust_politiciansGrab(counter)
+    trust_politicians = trust_politiciansGrab(counter, showData)
     tempRow.append(trust_politicians)
-    trust_politiciansSS = trust_politiciansGrabSS(counter)
+    trust_politiciansSS = trust_politiciansGrabSS(counter, showData)
     tempRow.append(trust_politiciansSS)
     counter += 1
 
-    twodoses = twodosesGrab(counter)
+    twodoses = twodosesGrab(counter, showData)
     tempRow.append(twodoses)
-    twodosesSS = twodosesGrabSS(counter)
+    twodosesSS = twodosesGrabSS(counter, showData)
     tempRow.append(twodosesSS)
     counter += 1
 
-    concerned_sideeffects = concerned_sideeffectsGrab(counter)
+    concerned_sideeffects = concerned_sideeffectsGrab(counter, showData)
     tempRow.append(concerned_sideeffects)
-    concerned_sideeffectsSS = concerned_sideeffectsGrabSS(counter)
+    concerned_sideeffectsSS = concerned_sideeffectsGrabSS(counter, showData)
     tempRow.append(concerned_sideeffectsSS)
     counter += 1
 
-    hesitant_sideeffects = hesitant_sideeffectsGrab(counter)
+    hesitant_sideeffects = hesitant_sideeffectsGrab(counter, showData)
     tempRow.append(hesitant_sideeffects)
-    hesitant_sideeffectsSS = hesitant_sideeffectsGrabSS(counter)
+    hesitant_sideeffectsSS = hesitant_sideeffectsGrabSS(counter, showData)
     tempRow.append(hesitant_sideeffectsSS)
     counter += 1
 
-    modified_acceptance = modified_acceptanceGrab(counter)
+    modified_acceptance = modified_acceptanceGrab(counter, showData)
     tempRow.append(modified_acceptance)
-    modified_acceptanceSS = modified_acceptanceGrabSS(counter)
+    modified_acceptanceSS = modified_acceptanceGrabSS(counter, showData)
     tempRow.append(modified_acceptanceSS)
     counter += 1
 
-    access_wash = access_washGrab(counter)
+    access_wash = access_washGrab(counter, showData)
     tempRow.append(access_wash)
-    access_washSS = access_washGrabSS(counter)
+    access_washSS = access_washGrabSS(counter, showData)
     tempRow.append(access_washSS)
     counter += 1
 
-    wash_hands_24h_3to6 = wash_hands_24h_3to6Grab(counter)
+    wash_hands_24h_3to6 = wash_hands_24h_3to6Grab(counter, showData)
     tempRow.append(wash_hands_24h_3to6)
-    wash_hands_24h_3to6SS = wash_hands_24h_3to6GrabSS(counter)
+    wash_hands_24h_3to6SS = wash_hands_24h_3to6GrabSS(counter, showData)
     tempRow.append(wash_hands_24h_3to6SS)
     counter += 1
 
-    wash_hands_24h_7orMore = wash_hands_24h_7orMoreGrab(counter)
+    wash_hands_24h_7orMore = wash_hands_24h_7orMoreGrab(counter, showData)
     tempRow.append(wash_hands_24h_7orMore)
-    wash_hands_24h_7orMoreSS = wash_hands_24h_7orMoreGrabSS(counter)
+    wash_hands_24h_7orMoreSS = wash_hands_24h_7orMoreGrabSS(counter, showData)
     tempRow.append(wash_hands_24h_7orMoreSS)
     counter += 1
 
-    cmty_covid = cmty_covidGrab(counter)
+    cmty_covid = cmty_covidGrab(counter, showData)
     tempRow.append(cmty_covid)
-    cmty_covidSS = cmty_covidGrabSS(counter)
+    cmty_covidSS = cmty_covidGrabSS(counter, showData)
     tempRow.append(cmty_covidSS)
     counter += 1
 
     preDataFrame.append(tempRow)
 
-    print(counter)
+    print(tempRow)
 
 print(preDataFrame)
 
