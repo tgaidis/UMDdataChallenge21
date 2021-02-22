@@ -683,7 +683,7 @@ for i in range(25000, 25500):
 
     preDataFrame.append(tempRow)
 
-    #print(tempRow)
+    print(str(counter/715008) + "% Done")
 
 print(len(preDataFrame))
 
@@ -716,3 +716,4 @@ apiDataset = DataFrame (preDataFrame, columns=[
 finalDataset = pd.merge(linkDF, apiDataset, how = 'outer', on = 'x1')
 
 finalDataset.to_csv('allData.csv')
+print('Done')
