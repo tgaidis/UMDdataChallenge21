@@ -2,19 +2,17 @@ import requests
 import json
 import pandas as pd
 import csv
-'''Creates 21 seperate csv files named respectively after the 21 indicators provided
-by UMD's Covid Symptom Tracker API.
+"""
+This program will create 21 CSV files named after the 21 indicators provided by
+UMD's covid Symptom Tracker API
 
-Includes all countries and is sorted by date.
-Starts May 1st and goes to the present
-
-'''
-
-
-def link_build_1(indicator, fil, year, month, day):
+Each CSV file will contain all countries and will be sorted by date.
+Each file will start on the 1st of May and end in the present.
+"""
+def link_builder(indicator, fil, s_year, s_month, s_day):
     with open(fil, "a", newline='') as output_file:
         url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) + str(month) + str(day)
+        string = s_year + s_month + s_day
         response = requests.get(url + string).text 
         if response != "Internal Server Error":
             jsonData = json.loads(response)
@@ -26,160 +24,67 @@ def link_build_1(indicator, fil, year, month, day):
                 dict_writer.writerows(toCSV)
         else:
             pass
-    
-       
-def link_build_2(indicator, fil, year, month, day):
-    with open(fil, "a", newline='') as output_file:
-        url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) + "0" + str(month) + "0" + str(day)
-        response = requests.get(url + string).text 
-        if response != "Internal Server Error":
-            jsonData = json.loads(response)
-            toCSV = jsonData.get('data')
-            if toCSV != []:
-                keys = toCSV[0].keys()
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(toCSV)
-        else:
-            pass
-   
-
-def link_build_3(indicator, fil, year, month, day):
-    with open(fil, "a", newline='') as output_file:
-        url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) + "0" + str(month) + str(day)
-        response = requests.get(url + string).text
-        if response != "Internal Server Error":
-            jsonData = json.loads(response)
-            toCSV = jsonData.get('data')
-            if toCSV != []:
-                keys = toCSV[0].keys()
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(toCSV)
-        else:
-            pass
-    
-        
-def link_build_4(indicator, fil, year, month, day):
-    with open(fil, "a", newline='') as output_file:
-        url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) + str(month) + "0" + str(day)
-        response = requests.get(url + string).text 
-        if response != "Internal Server Error":
-            jsonData = json.loads(response)
-            toCSV = jsonData.get('data')
-            if toCSV != []:
-                keys = toCSV[0].keys()
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(toCSV)
-        else:
-            pass
-   
-                  
-def link_build_5(indicator, fil, year, month, day):
-    with open(fil, "a", newline='') as output_file:
-        url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) + str(month) + str(day)
-        response = requests.get(url + string).text 
-        if response != "Internal Server Error":
-            jsonData = json.loads(response)
-            toCSV = jsonData.get('data')
-            if toCSV != []:
-                keys = toCSV[0].keys()
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(toCSV)
-        else:
-            pass
-   
-             
-def link_build_6(indicator, fil, year, month, day):
-    with open(fil, "a", newline='') as output_file:
-        url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) + "0" + str(month) + str(day)
-        response = requests.get(url + string).text 
-        if response != "Internal Server Error":
-            jsonData = json.loads(response)
-            toCSV = jsonData.get('data')
-            if toCSV != []:
-                keys = toCSV[0].keys()
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(toCSV)
-        else:
-            pass
-   
-    
-def link_build_7(indicator, fil, year, month, day):
-    with open(fil, "a", newline='') as output_file:
-        url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
-        string = str(year) +  str(month) + str(day)
-        response = requests.get(url + string).text 
-        if response != "Internal Server Error":
-            jsonData = json.loads(response)
-            toCSV = jsonData.get('data')
-            if toCSV != []:
-                keys = toCSV[0].keys()
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(toCSV)
-        else:
-            pass
-   
-    
         
 def get_by_indicator(indicator, fil):
     month = 5
     day = 1
     year = 2020
-    
+
     while year <= 2021 and month <= 12 and day <= 30:
         
-        if month == 12 and day > 29:
-            link_build_1(indicator, fil, year, month, day)
-            year += 1
+        if len(str(day)) == 1 and len(str(month)) == 1:  #0-9 day, 0-9 month
+            s_year = str(year)
+            s_day = "0" + str(day)
+            s_month = "0" + str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day += 1
+            
+        elif len(str(day)) == 2 and len(str(month)) == 1 and day < 30:  #10-29 day, 0-9 month
+            s_year = str(year)
+            s_day = str(day)
+            s_month = "0" + str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day += 1
+
+        elif len(str(day)) == 1 and len(str(month)) == 2:   #0-9 day, 10-12 month
+            s_year = str(year)
+            s_day = "0" +  str(day)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day += 1
+     
+        elif len(str(day)) == 2 and len(str(month)) == 2 and day < 30: #10-29 day, 10-12 month
+            s_year = str(year)
+            s_day = str(day)
+            s_month = str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day += 1
+    
+        elif day == 30 and month < 10: #30-31 day but not december, add a month
+            s_year = str(year)
+            s_day = str(day)
+            s_month = "0" + str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day = 1
+            month = month + 1
+        
+        elif day == 30 and month > 9 and month < 12: #30-31 day but not december, add a month
+            s_year = str(year)
+            s_day = str(day)
+            s_month = str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day = 1
+            month = month + 1
+        
+        elif day == 30 and month == 12:
+            s_year = str(year)
+            s_day = str(day)
+            s_month = str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
             day = 1
             month = 1
-            
+            year = year + 1
+            continue
         
-        elif day < 10 and month < 10:
-            link_build_2(indicator, fil, year,month,day)
-            day += 1
-            
-
-        elif day > 9 and month < 10 and day != 30 and day != 31:
-            link_build_3(indicator, fil, year, month, day)
-            day += 1
-            
-
-        elif day < 10 and month > 9 and day != 30 and day != 31:
-            link_build_4(indicator, fil, year, month,day)
-            day += 1
-            
-        
-        elif day > 9 and month > 9 and day != 30 and day != 31: 
-            link_build_5(indicator, fil, year,month,day)
-            day += 1
-            
-        
-        elif month < 10 and day == 30 or day == 31:
-            link_build_6(indicator, fil, year, month, day)
-            day = 1
-            month = month + 1
-            
-        
-        elif day == 30 or day == 31 and month > 9 and month != 12:
-            link_build_7(indicator, fil, year, month, day)
-            day = 1
-            month = month + 1
-            
-    
-
-          
-count = 0
 indicator_list = [
     "covid", 
     "flu", 
@@ -204,9 +109,8 @@ indicator_list = [
     "cmty_covid"
     ]
 
-while count <= 21: 
-    for indicator in indicator_list:
-        get_by_indicator(indicator, indicator+".csv")
+for indicator in indicator_list:
+    get_by_indicator(indicator, indicator+".csv")
 
             
 
