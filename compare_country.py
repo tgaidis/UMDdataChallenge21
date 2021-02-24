@@ -7,7 +7,16 @@ import sys
 import random
 import matplotlib.pyplot as plt
 import numpy as np; np.random.seed(1)
-    '''exit graph for it to make new one will update later tonight'''
+
+"""
+This program will create two line graphs, one for each country specified in the command line. 
+It'll create the line graph by creating two country CSV files, 
+fill it with that month's data, average the months data, and finally write it into compare.csv
+Using compare.csv matplotlib then creates the line graph.
+
+It is still very messy. Much room for improvement.
+"""
+    
 def get_data(country1, country2, indicator, date):
     date1 = str(date)
     with open(country1+".csv", "w") as output_file:
@@ -35,13 +44,12 @@ def get_data(country1, country2, indicator, date):
             else:
                 pass
                 counter1 += 1
-            
-            
+         
     date2 = str(date)
     with open(country2+".csv", "w") as output_file:
         counter2 = 0
         while counter2 <= 30:
-            print(counter2)
+            #print(counter2)
             url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=" + country2 + "&date=" + date2
             response = requests.get(url).text 
             if response != "Internal Server Error":
@@ -98,30 +106,32 @@ def create_graphic(fil):
                 result1.append(float(i.get("Percent")))
             else:
                 result2.append(float(i.get("Percent")))
-    result11 = sum(result1)/len(result1)
-    result22 = sum(result2)/len(result2)
-    print(result1, result2)
-    print(result11, result22)
-    fresult = [result11, result22]
-    print(fresult)
+    avg_month1 = sum(result1)/len(result1)
+    avg_month2 = sum(result2)/len(result2)
     
-    fig, ax1 = plt.subplots()
-    ax1 = fig.add_axes([0, 0.25, 1, 0.5])
-    ax1.pie(fresult, labels = (sys.argv[1], sys.argv[2]), radius = 1, autopct="%1.1f%%")
-    plt.title('Comparison based on monthly averages averaged up,' + str(date)[4:6])
-    plt.tight_layout()
+    dates1 = ["05", "06", "07","08","09","10","11","12", "01", "02"]
+    plt.plot(dates1,result1, marker="o", label=sys.argv[1].capitalize())
+    plt.plot(dates1, result2, marker="o", label=sys.argv[2].capitalize())
+    plt.title("A Comparison of " + sys.argv[1].capitalize() + " and " + sys.argv[2].capitalize() + " Based on " + sys.argv[3].capitalize())
+    plt.xlabel("Month")
+    plt.ylabel("Percent Indicator")
+    plt.legend()
     plt.show()
 
         
 if __name__ == "__main__":
     date = 20200501
     count = 0
-    while count < 30:
-        get_data(sys.argv[1].lower(), sys.argv[2].lower(), sys.argv[3], date)
-        get_average(sys.argv[1]+".csv", sys.argv[2]+".csv")
-        if int(str(date)[4:6]) != 12:
-            date += 100
-        elif int(str(date)[4:6]) == 12:
-            date = 20210101
-        count += 1
-        create_graphic("compare.csv")
+    while count < 11:
+        try:
+            get_data(sys.argv[1].lower(), sys.argv[2].lower(), sys.argv[3], date)
+            get_average(sys.argv[1]+".csv", sys.argv[2]+".csv")
+            if int(str(date)[4:6]) != 12:
+                date += 100
+            elif int(str(date)[4:6]) == 12:
+                date = 20210101
+            count += 1
+        except pd.errors.EmptyDataError:
+            break
+    create_graphic("compare.csv")
+    
