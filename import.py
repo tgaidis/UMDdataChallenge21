@@ -570,7 +570,7 @@ preDataFrame = []
 counter = 0
 showData = "False"
 
-for i in range(34048):
+for i in range(34):
     tempRow = []
 
     covid = covidGrab(counter, showData)
