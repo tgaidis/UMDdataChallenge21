@@ -64,7 +64,7 @@ def get_by_indicator(indicator, fil):
             link_builder(indicator, fil, s_year, s_month, s_day)
             day += 1
     
-        elif day == 30 and month < 10: #30-31 day but not december, add a month
+        elif day <= 31 and month < 10: #30-31 day but not december, add a month
             s_year = str(year)
             s_day = str(day)
             s_month = "0" + str(month)
@@ -72,7 +72,7 @@ def get_by_indicator(indicator, fil):
             day = 1
             month = month + 1
         
-        elif day == 30 and month > 9 and month < 12: #30-31 day but not december, add a month
+        elif day <= 31 and month > 9 and month < 12: #30-31 day but not december, add a month
             s_year = str(year)
             s_day = str(day)
             s_month = str(month)
@@ -80,7 +80,7 @@ def get_by_indicator(indicator, fil):
             day = 1
             month = month + 1
         
-        elif day == 30 and month == 12:
+        elif day == 31 and month == 12:
             s_year = str(year)
             s_day = str(day)
             s_month = str(month)
