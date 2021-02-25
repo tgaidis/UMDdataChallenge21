@@ -50,11 +50,36 @@ dataList = ["smoothed_cli", "smoothed_ili", "smoothed_mc", "smoothed_dc",
 "smoothed_access_wash", "smoothed_wash_hands_24h_3to6", "smoothed_wash_hands_24h_7ormore", 
 "smoothed_community_cli"]
 
+'''
 countryList = []
 with open('DC21Country.csv', newline='') as inputFile:
     for row in csv.reader(inputFile):
         countryList.append(row[1])
 countryList.remove('country')
+#print(countryList)
+
+allSchengen = ['Austria', 'Belgium', 'Czech Republic',
+'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland',
+'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Norway', 'Poland',
+'Portugal', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland']
+
+schengenCountriesList = []
+for i in allSchengen:
+    for j in countryList:
+        if i ==j:
+            schengenCountriesList.append(i)
+
+#print(schengenCountries)
+schengenDataset = DataFrame (schengenCountriesList, columns=[
+'Country'])
+schengenDataset.to_csv('schengenCountries.csv')
+print(schengenDataset)
+'''
+countryList = []
+with open('schengenCountries.csv', newline='') as inputFile:
+    for row in csv.reader(inputFile):
+        countryList.append(row[1])
+countryList.remove('Country')
 #print(countryList)
 
 
@@ -257,7 +282,7 @@ apiDataset = DataFrame (preDataFrame, columns=[
 'wash_hands_24h_7orMore', 'cmty_covid',
 ])
 
-apiDataset.to_csv('allAPIdataset.csv')
+apiDataset.to_csv('schengendataset.csv')
 
 
 #finalDataset = pd.merge(datesDF, apiDataset, how = 'outer')
