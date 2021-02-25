@@ -10,9 +10,9 @@ import numpy as np; np.random.seed(1)
 
 """
 This program will create two line graphs, one for each indicator specified in the command line. 
-It'll create the line graph by creating two indicator CSV files for a specific country, 
-fill it with that country's data, and write it into comparec.csv
-Using comparec.csv matplotlib then creates the line graph.
+It'll create the line graph by creating two country CSV files, 
+fill it with that month's data, average the months data, and finally write it into compare.csv
+Using compare.csv matplotlib then creates the line graph.
 
 It is still very messy. Much room for improvement.
 """
