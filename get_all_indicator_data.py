@@ -8,9 +8,13 @@ UMD's covid Symptom Tracker API
 
 Each CSV file will contain all countries and will be sorted by date.
 Each file will start on the 1st of May and end in the present.
+
+Make sure to change the date to May 1st if you dont have the files yet. Once you
+have it all, each time you want to update it set the date to the last entry received 
+to only append new entries.
 """
 def link_builder(indicator, fil, s_year, s_month, s_day):
-    with open(fil, "a", newline='') as output_file:
+    with open("indicators/"+fil, "a", newline='') as output_file:
         url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="
         string = s_year + s_month + s_day
         response = requests.get(url + string).text 
@@ -20,15 +24,16 @@ def link_builder(indicator, fil, s_year, s_month, s_day):
             if toCSV != []:
                 keys = toCSV[0].keys()
                 dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
+                if output_file.tell() == 0:
+                    dict_writer.writeheader()
                 dict_writer.writerows(toCSV)
         else:
             pass
         
 def get_by_indicator(indicator, fil):
-    month = 5
-    day = 1
-    year = 2020
+    month = 2
+    day = 22
+    year = 2021
 
     while year <= 2021 and month <= 12 and day <= 30:
         
@@ -106,7 +111,17 @@ indicator_list = [
     "access_wash",
     "wash_hands_24h_3to6",
     "wash_hands_24h_7orMore",
-    "cmty_covid"
+    "cmty_covid",
+    "hes_side_effects",
+    "hes_wontwork",
+    "hes_dontbelieve"
+    "hes_dontlike",
+    "hes_waitlater",
+    "hes_otherpeople",
+    "hes_cost",
+    "hes_religious",
+    "hes_other",
+    "trust_doctors",
     ]
 
 for indicator in indicator_list:
