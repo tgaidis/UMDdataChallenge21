@@ -37,41 +37,197 @@ trust_healthcare_r = []
 trust_healthcare_d = []
 trust_who_r = []
 trust_who_d = []
+trust_govt_r = []
+trust_govt_d = []
+trust_politicians_r = []
+trust_politicians_d = []
+twodoses_r = []
+twodoses_d = []
+wash_hands_24h_3to6_r = []
+wash_hands_24h_3to6_d = []
+wash_hands_24h_7orMore_r = []
+wash_hands_24h_7orMore_d = []
+cmty_covid_r = []
+cmty_covid_d = []
+hes_side_effects_r = []
+hes_side_effects_d = []
+hes_wontwork_r = []
+hes_wontwork_d = []
+hes_dontbelieve_r = []
+hes_dontbelieve_d = []
+hes_dontlike_r = []
+hes_dontlike_d = []
+hes_waitlater_r = []
+hes_waitlater_d = []
+hes_otherpeople_r = []
+hes_otherpeople_d = []
+hes_cost_r = []
+hes_cost_d = []
+hes_religious_r = []
+hes_religious_d = []
+hes_other_r = []
+hes_other_d = []
+trust_doctors_r = []
+trust_doctors_d = []
 
 for i in range(len(df1)):
     if str(df1.loc[i][1]) == "covid":
+        day = 1
         covid_r.append(df1.loc[i][0])
-        covid_d.append(i)
+        covid_d.append(day)
+        day +=1
     elif str(df1.loc[i][1]) == "flu":
+        day = 1
         flu_r.append(df1.loc[i][0])
-        flu_d.append(i)
+        flu_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "mask":
+        day = 1
         mask_r.append(df1.loc[i][0])
-        mask_d.append(i)
+        mask_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "contact":
+        day = 1
         contact_r.append(df1.loc[i][0])
-        contact_d.append(i)
+        contact_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "finance":
+        day = 1
         finance_r.append(df1.loc[i][0])
-        finance_d.append(i)
+        finance_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "anosmia":
+        day = 1
         anosmia_r.append(df1.loc[i][0])
-        anosmia_d.append(i)
+        anosmia_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "vaccine_acpt":
+        day = 1
         vaccine_acpt_r.append(df1.loc[i][0])
-        vaccine_acpt_d.append(i)
+        vaccine_acpt_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "covid_vaccine":
+        day = 1
         covid_vaccine_r.append(df1.loc[i][0])
-        covid_vaccine_d.append(i)
+        covid_vaccine_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "trust_fam":
+        day = 1
         trust_fam_r.append(df1.loc[i][0])
-        trust_fam_d.append(i)
+        trust_fam_d.append(day)
+        day +=1
     elif str(df1.loc[i][1]) == "trust_healthcare":
+        day = 1
         trust_healthcare_r.append(df1.loc[i][0])
-        trust_healthcare_d.append(i)
+        trust_healthcare_d.append(day)
+        day += 1
     elif str(df1.loc[i][1]) == "trust_who":
+        day += 1
         trust_who_r.append(df1.loc[i][0])
-        trust_who_d.append(i)
+        trust_who_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "trust_govt":
+        day += 1
+        trust_govt_r.append(df1.loc[i][0])
+        trust_govt_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "trust_politicians":
+        day += 1
+        trust_politicians_r.append(df1.loc[i][0])
+        trust_politicians_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "twodoses":
+        day += 1
+        twodoses_r.append(df1.loc[i][0])
+        twodoses_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "concerned_sideeffects":
+        day += 1
+        concerned_sideeffects_r.append(df1.loc[i][0])
+        concerned_sideeffects_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hesitant_sideeffects":
+        day += 1
+        hesitant_sideeffects_r.append(df1.loc[i][0])
+        hesitant_sideeffects_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "modified_acceptance":
+        day += 1
+        modified_acceptance_r.append(df1.loc[i][0])
+        modified_acceptance_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "access_wash":
+        day += 1
+        access_wash_r.append(df1.loc[i][0])
+        access_wash_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "wash_hands_24h_3to6":
+        day += 1
+        wash_hands_24h_3to6_r.append(df1.loc[i][0])
+        wash_hands_24h_3to6_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "wash_hands_24h_7orMore":
+        day += 1
+        wash_hands_24h_7orMore_r.append(df1.loc[i][0])
+        wash_hands_24h_7orMore_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "cmty_covid":
+        day += 1
+        cmty_covid_r.append(df1.loc[i][0])
+        cmty_covid_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_side_effects":
+        day += 1
+        hes_side_effects_r.append(df1.loc[i][0])
+        hes_side_effects_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_wontwork":
+        day += 1
+        hes_wontwork_r.append(df1.loc[i][0])
+        hes_wontwork_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_dontbelieve":
+        day += 1
+        hes_dontbelieve_r.append(df1.loc[i][0])
+        hes_dontbelieve_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_dontlike":
+        day += 1
+        hes_dontlike_r.append(df1.loc[i][0])
+        hes_dontlike_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_waitlater":
+        day += 1
+        hes_waitlater_r.append(df1.loc[i][0])
+        hes_waitlater_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_otherpeople":
+        day += 1
+        hes_otherpeople_r.append(df1.loc[i][0])
+        hes_otherpeople_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_cost":
+        day += 1
+        hes_cost_r.append(df1.loc[i][0])
+        hes_cost_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_religious":
+        day += 1
+        hes_religious_r.append(df1.loc[i][0])
+        hes_religious_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "hes_other":
+        day += 1
+        hes_other_r.append(df1.loc[i][0])
+        hes_other_d.append(day)
+        day += 1
+    elif str(df1.loc[i][1]) == "trust_doctors":
+        day += 1
+        trust_doctors_r.append(df1.loc[i][0])
+        trust_doctors_d.append(day)
+        day += 1
+    
+    
     
 plt.subplot(6,1,1)
 plt.plot(covid_d, covid_r, color="blue", label="Covid")
