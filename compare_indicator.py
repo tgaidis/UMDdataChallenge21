@@ -9,20 +9,20 @@ import matplotlib.pyplot as plt
 import numpy as np; np.random.seed(1)
 
 """
-This program will create two line graphs, one for each country specified in the command line. 
-It'll create the line graph by creating two country CSV files, 
-fill it with that month's data, average the months data, and finally write it into compare.csv
-Using compare.csv matplotlib then creates the line graph.
+This program will create two line graphs, one for each indicator specified in the command line. 
+It'll create the line graph by creating two indicator CSV files for a specific country, 
+fill it with that country's data, and write it into comparec.csv
+Using comparec.csv matplotlib then creates the line graph.
 
 It is still very messy. Much room for improvement.
 """
     
-def get_data(country1, country2, indicator, date):
+def get_data(country, indicator1, indicator2, date):
     date1 = str(date)
-    with open(country1+".csv", "w") as output_file:
+    with open(country+"_"+indicator1+".csv", "a+") as output_file:
         counter1 = 0
         while counter1 <= 30:
-            url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=" + country1 + "&date=" + date1
+            url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator1 + "&type=daily&country=" + country + "&date=" + date1
             response = requests.get(url).text
             if response != "Internal Server Error":
                 jsonData = json.loads(response)
@@ -46,11 +46,11 @@ def get_data(country1, country2, indicator, date):
                 counter1 += 1
          
     date2 = str(date)
-    with open(country2+".csv", "w") as output_file:
+    with open(country+"_"+indicator2+".csv", "a+") as output_file:
         counter2 = 0
         while counter2 <= 30:
             #print(counter2)
-            url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=" + country2 + "&date=" + date2
+            url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator2 + "&type=daily&country=" + country + "&date=" + date2
             response = requests.get(url).text 
             if response != "Internal Server Error":
                 jsonData = json.loads(response)
@@ -76,45 +76,48 @@ def get_data(country1, country2, indicator, date):
 def get_average(file1, file2):
     df1 = pd.read_csv(file1)
     df2 = pd.read_csv(file2)
-    avg1 = round((sum(df1["percent_cli"]) / len(df1)) * 100, 2)
-    avg2 = round((sum(df2["percent_cli"]) / len(df1)) * 100, 2)
-    with open("compare.csv", "a") as fd:
-        headers = ["Percent", "Country", "Date"]
+
+
+    with open("comparec.csv", "a") as fd:  
+        headers = ["Percent", "Indicator", "Date"]
         dict_writer = csv.DictWriter(fd, headers)
         if fd.tell() == 0:
             dict_writer.writeheader()
-        fd.write(str(avg1))
-        fd.write(",")
-        fd.write(sys.argv[1].capitalize())
-        fd.write(",")
-        fd.write(str(date)[4:6])
-        fd.write("\n")
-        fd.write(str(avg2))
-        fd.write(",")
-        fd.write(sys.argv[2].capitalize())
-        fd.write(",")
-        fd.write(str(date)[4:6])
-        fd.write("\n")
+        for i in range(len(df1)):
+            fd.write(str(df1.loc[i][0]))
+            fd.write(",")
+            fd.write(str(sys.argv[2].capitalize()))
+            fd.write(",")
+            fd.write(str(df1.loc[i][-1]))
+            fd.write("\n")
+            fd.write(str(df2.loc[i][0]))
+            fd.write(",")
+            fd.write(str(sys.argv[3].capitalize()))
+            fd.write(",")
+            fd.write(str(df2.loc[i][-1]))
+            fd.write("\n")
+            
         
 def create_graphic(fil):
-    with open("compare.csv", newline='') as f:
+    with open("comparec.csv", newline='') as f:
         data = csv.DictReader(f)
         result1 = []
         result2 = []
+        date = 0
         for i in data:
-            if i.get("Country") == str(sys.argv[1].capitalize()):
-                result1.append(float(i.get("Percent")))
-            else:
-                result2.append(float(i.get("Percent")))
-    avg_month1 = sum(result1)/len(result1)
-    avg_month2 = sum(result2)/len(result2)
-    
-    dates1 = ["05", "06", "07","08","09","10","11","12", "01", "02"]
-    plt.plot(dates1,result1, marker="o", label=sys.argv[1].capitalize())
-    plt.plot(dates1, result2, marker="o", label=sys.argv[2].capitalize())
-    plt.title("A Comparison of " + sys.argv[1].capitalize() + " and " + sys.argv[2].capitalize() + " Based on " + sys.argv[3].capitalize())
-    plt.xlabel("Month")
-    plt.ylabel("Percent Indicator")
+            if i.get("Date")[4:6] != date:
+                date = i.get("Date")
+                if i.get("Indicator") == str(sys.argv[2].capitalize()):
+                    result1.append( float(i.get("Percent"))*100)
+                elif i.get("Indicator") == str(sys.argv[3].capitalize()):
+                    result2.append(float(i.get("Percent"))*100)
+
+    print(result2)
+    plt.plot(result1, label=sys.argv[2].capitalize())
+    plt.plot( result2, label=sys.argv[3].capitalize())
+    plt.title("A Comparison of " + sys.argv[1].capitalize() + "'s indicators: " + sys.argv[2].capitalize() + " And " + sys.argv[3].capitalize())
+    plt.xlabel("<--May 1st 2020 to the Present -->")
+    plt.ylabel("Percent")
     plt.legend()
     plt.show()
 
@@ -122,16 +125,18 @@ def create_graphic(fil):
 if __name__ == "__main__":
     date = 20200501
     count = 0
-    while count < 11:
+    
+    while count < 12:
         try:
             get_data(sys.argv[1].lower(), sys.argv[2].lower(), sys.argv[3], date)
-            get_average(sys.argv[1]+".csv", sys.argv[2]+".csv")
             if int(str(date)[4:6]) != 12:
                 date += 100
             elif int(str(date)[4:6]) == 12:
                 date = 20210101
             count += 1
         except pd.errors.EmptyDataError:
-            break
-    create_graphic("compare.csv")
+            continue
+
+    get_average(sys.argv[1]+"_"+sys.argv[2]+".csv", sys.argv[1]+"_"+sys.argv[3]+".csv")
+    create_graphic("comparec.csv")
     
