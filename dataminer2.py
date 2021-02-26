@@ -268,9 +268,9 @@ for i in range(len(iteratedList)):
     counter2 = 0
     counter3 += 1
 
-    print(tempRow)
+    #print(tempRow)
     preDataFrame.append(tempRow)
-    print(str((counter3/len(iteratedList))*100) + "% Done..." + str(len(iteratedList)-counter3) + " rows remaining")
+    print(str((counter3/len(iteratedList))*100) + "% Done...." + str(len(iteratedList)-counter3) + " rows remaining")
 
 apiDataset = DataFrame (preDataFrame, columns=[
 'Country', 'Date', 'CLI', 'Flu', 'Mask', 'Contact', 'Finance',
