@@ -459,38 +459,37 @@ for i in range(len(df2)):
         trust_doctors_d2.append(str(df2.loc[i][2]))
 
 
+fig, axes = plt.subplots(3, 3, gridspec_kw={'hspace': 1, 'wspace': 0.4})
+fig.suptitle(sys.argv[1] + " vs " + sys.argv[2] + " compare_countries_graphics.py")
 
+line_labels = [sys.argv[1], sys.argv[2]]
 
-fig, ax = plt.subplots(3,3, gridspec_kw={'hspace': 1, 'wspace': 0.4})
-plt.suptitle(sys.argv[1] + " vs " + sys.argv[2])
+    
+(ax1, ax2, ax3), (ax4, ax5, ax6), (ax7, ax8, ax9) = axes
 
-(ax1, ax2, ax3), (ax4, ax5, ax6), (ax7, ax8, ax9) = ax
+fmt = mdates.DateFormatter("%y-%m")
+loc = ticker.LinearLocator(9)
 
 #1 covid
-fmt = mdates.DateFormatter("%y-%m")
 ax1.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
 ax1.xaxis.set_major_locator(loc)
 for entry in ax1.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_d]
 x11 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_d2]
-ax1.plot(x1, covid_r, color="orange")
-ax1.plot(x11, covid_r2, color="blue")
+l1 = ax1.plot(x1, covid_r, color="orange", label=sys.argv[1])
+l2 = ax1.plot(x11, covid_r2, color="blue", label=sys.argv[2])
 ax1.set_title("Covid")
 
 #2 flu
-fmt = mdates.DateFormatter("%y-%m")
 ax2.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
 ax2.xaxis.set_major_locator(loc)
 for entry in ax2.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x2 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in flu_d]
 x22 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in flu_d2]
-ax2.plot(x2, flu_r, color="orange")
-ax2.plot(x22, flu_r2, color="blue")
-
+ax2.plot(x2, flu_r, color="orange", label=sys.argv[1])
+ax2.plot(x22, flu_r2, color="blue", label=sys.argv[2])
 ax2.set_title("Flu")
 
 #3 mask
@@ -502,8 +501,8 @@ for entry in ax3.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x3 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in mask_d]
 x33 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in mask_d2]
-ax3.plot(x3, mask_r, color="orange")
-ax3.plot(x33, mask_r2, color="blue")
+ax3.plot(x3, mask_r, color="orange", label=sys.argv[1])
+ax3.plot(x33, mask_r2, color="blue", label=sys.argv[2])
 ax3.set_title("Mask")
 
 #4 contact
@@ -515,8 +514,8 @@ for entry in ax4.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x4 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in contact_d]
 x44 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in contact_d2]
-ax4.plot(x4, contact_r, color="orange")
-ax4.plot(x44, contact_r2, color="blue")
+ax4.plot(x4, contact_r, color="orange", label=sys.argv[1])
+ax4.plot(x44, contact_r2, color="blue", label=sys.argv[2])
 ax4.set_title("Contact")
 
 #4 finance
@@ -528,8 +527,8 @@ for entry in ax5.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x5 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in finance_d]
 x55 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in finance_d2]
-ax5.plot(x5, finance_r, color="orange")
-ax5.plot(x55, finance_r2, color="blue")
+ax5.plot(x5, finance_r, color="orange", label=sys.argv[1])
+ax5.plot(x55, finance_r2, color="blue", label=sys.argv[2])
 ax5.set_title("Finance")
 
 #6 anosmia
@@ -541,8 +540,8 @@ for entry in ax6.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x6 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in anosmia_d]
 x66 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in anosmia_d2]
-ax6.plot(x6, anosmia_r, color="orange")
-ax6.plot(x66, anosmia_r2, color="blue")
+ax6.plot(x6, anosmia_r, color="orange", label=sys.argv[1])
+ax6.plot(x66, anosmia_r2, color="blue", label=sys.argv[2])
 ax6.set_title("Anosmia")
 
 #7 cmty covid
@@ -554,8 +553,8 @@ for entry in ax7.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x7 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in cmty_covid_d]
 x77 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in cmty_covid_d2]
-ax7.plot(x7, cmty_covid_r, color="orange")
-ax7.plot(x77, cmty_covid_r2, color="blue")
+ax7.plot(x7, cmty_covid_r, color="orange", label=sys.argv[1])
+ax7.plot(x77, cmty_covid_r2, color="blue", label=sys.argv[2])
 ax7.set_title("Cmty Covid")
 
 #8 covid vacc
@@ -567,8 +566,8 @@ for entry in ax8.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x8 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_vaccine_d]
 x88 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_vaccine_d2]
-ax8.plot(x8, covid_vaccine_r, color="orange")
-ax8.plot(x8, covid_vaccine_r2, color="blue")
+ax8.plot(x8, covid_vaccine_r, color="orange", label=sys.argv[1])
+ax8.plot(x8, covid_vaccine_r2, color="blue", label=sys.argv[2])
 ax8.set_title("Covid Vaccine")
 
 #9 two doses
@@ -580,10 +579,11 @@ for entry in ax9.xaxis.get_ticklabels():
     entry.set_rotation(45)
 x9 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in twodoses_d]
 x99 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in twodoses_d2]
-ax9.plot(x9, twodoses_r, color="orange")
-ax9.plot(x99, twodoses_r2, color="blue")
+ax9.plot(x9, twodoses_r, color="orange", label=sys.argv[1])
+ax9.plot(x99, twodoses_r2, color="blue", label= sys.argv[2])
 ax9.set_title("Two doses")
 
+fig.legend([l1,l2], labels=line_labels, loc='upper left')
 plt.show()
 
 
