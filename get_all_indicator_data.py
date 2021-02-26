@@ -31,48 +31,49 @@ def link_builder(indicator, fil, s_year, s_month, s_day):
             pass
         
 def get_by_indicator(indicator, fil):
-    month = 2
-    day = 22
-    year = 2021
+    month = 5
+    day = 1
+    year = 2020
 
-    while year <= 2021 and month <= 12 and day <= 30:
+    while year <= 2021 and month <= 12 and day <= 31:
         
-        if len(str(day)) == 1 and len(str(month)) == 1:  #0-9 day, 0-9 month
+        if day >= 1 and day <= 9 and month <= 9:  #0-9 day, 0-9 month
             s_year = str(year)
             s_day = "0" + str(day)
             s_month = "0" + str(month)
             link_builder(indicator, fil, s_year, s_month, s_day)
             day += 1
             
-        elif len(str(day)) == 2 and len(str(month)) == 1 and day < 30:  #10-29 day, 0-9 month
+        elif day >= 10 and day <= 29 and  month <= 9:  #10-29 day, 0-9 month
             s_year = str(year)
             s_day = str(day)
             s_month = "0" + str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day += 1
+        
+        elif day == 30 and month <= 9:
+            s_year = str(year)
+            s_day = str(day)
+            s_month = "0" + str(month)
+            link_builder(indicator, fil, s_year, s_month, s_day)
+            day = 1
+            month = month + 1
+            
+        elif day >= 1 and day <= 9 and month >= 10:
+            s_year = str(year)
+            s_day = "0" + str(day)
+            s_month = str(month)
             link_builder(indicator, fil, s_year, s_month, s_day)
             day += 1
 
-        elif len(str(day)) == 1 and len(str(month)) == 2:   #0-9 day, 10-12 month
-            s_year = str(year)
-            s_day = "0" +  str(day)
-            link_builder(indicator, fil, s_year, s_month, s_day)
-            day += 1
-     
-        elif len(str(day)) == 2 and len(str(month)) == 2 and day < 30: #10-29 day, 10-12 month
+        elif day >= 10 and day <= 29 and month >= 10 :
             s_year = str(year)
             s_day = str(day)
             s_month = str(month)
             link_builder(indicator, fil, s_year, s_month, s_day)
             day += 1
-    
-        elif day <= 31 and month < 10: #30-31 day but not december, add a month
-            s_year = str(year)
-            s_day = str(day)
-            s_month = "0" + str(month)
-            link_builder(indicator, fil, s_year, s_month, s_day)
-            day = 1
-            month = month + 1
         
-        elif day <= 31 and month > 9 and month < 12: #30-31 day but not december, add a month
+        elif day == 30 and month >= 10 and month != 12:
             s_year = str(year)
             s_day = str(day)
             s_month = str(month)
@@ -80,7 +81,7 @@ def get_by_indicator(indicator, fil):
             day = 1
             month = month + 1
         
-        elif day == 31 and month == 12:
+        elif day == 30 and month == 12:
             s_year = str(year)
             s_day = str(day)
             s_month = str(month)
@@ -88,7 +89,8 @@ def get_by_indicator(indicator, fil):
             day = 1
             month = 1
             year = year + 1
-            continue
+        
+        
         
 indicator_list = [
     "covid", 
@@ -114,14 +116,14 @@ indicator_list = [
     "cmty_covid",
     "hes_side_effects",
     "hes_wontwork",
-    "hes_dontbelieve"
+    "hes_dontbelieve",
     "hes_dontlike",
     "hes_waitlater",
     "hes_otherpeople",
     "hes_cost",
     "hes_religious",
     "hes_other",
-    "trust_doctors",
+    "trust_doctors"
     ]
 
 for indicator in indicator_list:
