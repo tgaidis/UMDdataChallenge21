@@ -2,11 +2,14 @@
 import pandas as pd
 import matplotlib as plt
 import csv
+import seaborn as sns
 
 #import dataframe
-bigDF = pd.read_csv('schengendataset.csv')
+bigDF = pd.read_csv('SchengenData.csv')
 #change to Datetime
-bigDF['Date'] = pd.to_datetime(bigDF['Date'], format = '%Y%m%d')
+#bigDF['Date'] = pd.to_datetime(bigDF['Date'], format = '%Y%m%d')
+#bigDF.to_csv('SchengenData.csv')
+
 
 #list of countries (for reference)
 countryList = []
@@ -60,6 +63,17 @@ def indicatorSelector(indicators):
         if val != "next" and val not in indicators:
             print("The indicator(s) you selected are not valid.  Please try another.")
             val = input("Enter an indicator (or next): ")
+            
+def indicatSelect(indicators):
+    print('Please select the indicators you would like to graph.')
+    print('The list of indicators is as follows: ', indicators)
+    val = input("Enter an indicator (or next): ")
+    if val in indicators:
+        return val
+    if val not in indicators:
+        print("The indicator(s) you selected are not valid.  Please try another.")
+        val = input("Enter an indicator (or next): ")
+    
 
 def dataShaper(countries, bigData):
     #retrieve data from other functions
@@ -68,20 +82,13 @@ def dataShaper(countries, bigData):
     selectedC = bigData.loc[bigData['Country'].isin(countries)]
     return selectedC
 
-def graphMaker(info, indicators):
+def graphMaker(info, indicator):
     #info['Date'] = pd.to_datetime(info['Date'], format = '%Y%m%d')
-    lines = info.plot(x='Date', y=indicators)
-    return lines
+    #lines = info.plot(x='Date', y=indicators)
+    #return lines
+    sea = sns.lineplot(data = info, x='Date', y=indicator, hue='Country')
 
 xc = countrySelector(countryList)
-yi = indicatorSelector(indicatorList)
+yi = indicatSelect(indicatorList)
 df = dataShaper(xc, bigDF)
 graphMaker(df, yi)
-
-
-
-
-
-
-
-
