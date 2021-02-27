@@ -12,12 +12,10 @@ import matplotlib.cbook as cbook
 from matplotlib import ticker
 import datetime as dt
 
-'''This program will create 9 graphs of each indicator we have chosen.
-It will show the percentage of those indicators for a specified country.
-IN ORDER TO RUN:
-you must already have the necessary CSV files.
+'''This program will create one graph of a countrys indicator.
+To run, you must already have the CSV file for the country.
 Simply type in the terminal:
-python3 create_graphics.py "Country"
+python3 country_single.py "Country" "Indicator"
 '''
 
 df1 = pd.read_csv("countries/"+sys.argv[1]+".csv")
@@ -239,115 +237,97 @@ for i in range(len(df1)):
         trust_doctors_r.append(df1.loc[i][0])
         trust_doctors_d.append(str(df1.loc[i][2]))
 
-#1,1, gridspec_kw={'hspace': 1, 'wspace': 0.2}
-#mdates.DateFormatter('%Y%m')
+fig, ax = plt.subplots(1,1, gridspec_kw={'hspace': 1, 'wspace': 0.4})
+line_labels = sys.argv[2]
+(ax1) = ax
 
-
-fig, ax = plt.subplots(3,3, gridspec_kw={'hspace': 1, 'wspace': 0.4})
-plt.suptitle(sys.argv[1])
-
-(ax1, ax2, ax3), (ax4, ax5, ax6), (ax7, ax8, ax9)  = ax
-
-#1 covid
-fmt = mdates.DateFormatter("%y-%m")
-ax1.xaxis.set_major_formatter(fmt)
+fmt = mdates.DateFormatter("%b-%Y")
 loc = ticker.LinearLocator(9)
+ax1.xaxis.set_major_formatter(fmt)
 ax1.xaxis.set_major_locator(loc)
 for entry in ax1.xaxis.get_ticklabels():
     entry.set_rotation(45)
-x1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_d]
-ax1.plot(x1, covid_r, color="red")
-ax1.set_title("Covid")
 
-#2 flu
-fmt = mdates.DateFormatter("%y-%m")
-ax2.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax2.xaxis.set_major_locator(loc)
-for entry in ax2.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x2 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in flu_d]
-ax2.plot(x2, flu_r, color="blue")
-ax2.set_title("Flu")
+if sys.argv[2].lower() == "covid":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_d]
+    l1 = ax1.plot(d1, covid_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Covid Like Illnesses in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#3 mask
-fmt = mdates.DateFormatter("%y-%m")
-ax3.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax3.xaxis.set_major_locator(loc)
-for entry in ax3.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x3 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in mask_d]
-ax3.plot(x3, mask_r, color="green")
-ax3.set_title("Mask")
+elif sys.argv[2].lower() == "flu":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in flu_d]
+    l1 = ax1.plot(d1, flu_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Flu Like Illnesses in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#4 contact
-fmt = mdates.DateFormatter("%y-%m")
-ax4.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax4.xaxis.set_major_locator(loc)
-for entry in ax4.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x4 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in contact_d]
-ax4.plot(x4, contact_r, color="orange")
-ax4.set_title("Contact")
+elif sys.argv[2].lower() == "mask":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in mask_d]
+    l1 = ax1.plot(d1, mask_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent Wore Mask in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#4 finance
-fmt = mdates.DateFormatter("%y-%m")
-ax5.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax5.xaxis.set_major_locator(loc)
-for entry in ax5.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x5 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in finance_d]
-ax5.plot(x5, finance_r, color="brown")
-ax5.set_title("Finance")
+elif sys.argv[2].lower() == "contact":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in contact_d]
+    l1 = ax1.plot(d1, contact_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent had Contact Outside Household in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#6 anosmia
-fmt = mdates.DateFormatter("%y-%m")
-ax6.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax6.xaxis.set_major_locator(loc)
-for entry in ax6.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x6 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in anosmia_d]
-ax6.plot(x6, anosmia_r, color="purple")
-ax6.set_title("Anosmia")
+elif sys.argv[2].lower() == "finance":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in finance_d]
+    l1 = ax1.plot(d1, finance_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent Worried About Finances in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#7 cmty covid
-fmt = mdates.DateFormatter("%y-%m")
-ax7.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax7.xaxis.set_major_locator(loc)
-for entry in ax7.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x7 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in cmty_covid_d]
-ax7.plot(x7, cmty_covid_r, color="green")
-ax7.set_title("Cmty Covid")
+elif sys.argv[2].lower() == "anosmia":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in anosmia_d]
+    l1 = ax1.plot(d1, anosmia_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent Reporting Anosmia in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#8 covid vacc
-fmt = mdates.DateFormatter("%y-%m")
-ax8.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax8.xaxis.set_major_locator(loc)
-for entry in ax8.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x8 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_vaccine_d]
-ax8.plot(x8, covid_vaccine_r, color="red")
-ax8.set_title("Covid Vaccine")
+elif sys.argv[2].lower() == "cmty covid":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in cmty_covid_d]
+    l1 = ax1.plot(d1, cmty_covid_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent Know Person with Covid in Community in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-#9 two doses
-fmt = mdates.DateFormatter("%y-%m")
-ax9.xaxis.set_major_formatter(fmt)
-loc = ticker.LinearLocator(9)
-ax9.xaxis.set_major_locator(loc)
-for entry in ax9.xaxis.get_ticklabels():
-    entry.set_rotation(45)
-x9 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in twodoses_d]
-ax9.plot(x9, twodoses_r, color="blue")
-ax9.set_title("Two doses")
+elif sys.argv[2].lower() == "covid vacc":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in covid_vaccine_d]
+    l1 = ax1.plot(d1, covid_vaccine_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent Vaccinated with Covid in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
-plt.show()
+elif sys.argv[2].lower() == "trust gov":
+    d1 = [dt.datetime.strptime(d,"%Y%m%d").date() for d in trust_govt_d]
+    l1 = ax1.plot(d1, trust_govt_r, color="blue", label=sys.argv[2])
+    ax1.set_title("Percent of Respondent Trust Vaccine reccomended by Govt in "+ sys.argv[1])
+    ax1.set_ylabel("Percent")
+    ax1.set_xlabel("Date")
+    fig.legend([l1], labels=line_labels, loc='upper left')
+    plt.show()
 
 
 
