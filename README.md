@@ -1,10 +1,10 @@
 # UMDdataChallenge21
 UMD Data Challenge 2021 - COVID-19 Global Symptoms Tracker
 Team42:
-*Gabriel Sestieri
-*Theodore Gaidis
-*Manar Al-badarneh
-*Brendan Goodhue
+* Gabriel Sestieri
+* Theodore Gaidis
+* Manar Al-badarneh
+* Brendan Goodhue
 
 ## Background
 University of Maryland’s Joint Program in Survey Methodology and Carnegie Mellon
