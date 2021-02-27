@@ -347,7 +347,4 @@ for country in countries:
                 f.write("trust_doctors")
                 f.write(",")
                 f.write(str(df31.loc[i][8]))
-                f.write("\n")
-    
-    
-        
+                f.write("\n")     
