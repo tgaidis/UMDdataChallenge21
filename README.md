@@ -64,4 +64,12 @@ on the number of people willing to take a vaccine? To tie together the rest of
 our findings we asked how do social behaviors (contact with someone outside your
 household) correlate to mask wearing habits, COVID-19 cases in the community, and financial worries?
 
-In analysis of our first primary question we came to the conclusion that there is a correlation in COVID-19 spikes between neighboring countries in the Schengen region. All countries of the region had similar trends in the indicators we deemed most important to focus on. Next we strove to answer how notable figures and peoples' opinions of trust in the vaccine affect their peers' willingness to take the vaccine; we found healthcare officials garnered the most trust while politicians, the least. Finally, in our analysis of survey respondents mask wearing habits we found that in summer months mask wearing decreased however this did not lead to a notable increase in COVID-19 like symptoms.
+In analysis of our first primary question we came to the conclusion that there is
+a correlation in COVID-19 spikes between neighboring countries in the Schengen 
+region. All countries of the region had similar trends in the indicators we deemed
+most important to focus on. Next we strove to answer how notable figures and peoples'
+opinions of trust in the vaccine affect their peers' willingness to take the vaccine;
+we found healthcare officials garnered the mosttrust while politicians, the least. 
+Finally, in our analysis of survey respondents mask wearing habits we found that
+in summer months mask wearing decreased however this did not lead to a notable 
+increase in COVID-19 like symptoms.
