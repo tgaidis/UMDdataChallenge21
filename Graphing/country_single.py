@@ -12,9 +12,11 @@ import matplotlib.cbook as cbook
 from matplotlib import ticker
 import datetime as dt
 
+
 '''This program will create one graph of a countrys indicator.
 To run, you must already have the CSV file for the country.
-Simply type in the terminal:
+
+IN ORDER TO RUN:
 python3 country_single.py "Country" "Indicator"
 '''
 

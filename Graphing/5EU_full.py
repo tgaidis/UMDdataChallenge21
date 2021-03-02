@@ -13,12 +13,12 @@ from matplotlib import ticker
 import datetime as dt
 
 '''This program will create 9 graphs for the 9 indicators we have chosen. 
-Each graph will include a line graph of the two countries specified in the terminal.
-The first country will be orange and the second will be blue.
-IN ORDER TO RUN:
-You must specify two countries in the terminal, and have all necessary files.
+Each graph will include a line graph of the 5 countries specified.
 
-"python3 compare_allindic_countries.py Country1 Country2"
+IN ORDER TO RUN:
+Have all necessary files from get_all_indicator_data.py and get_all_country_data.py
+
+"python3 5EU_full.py"
 '''
 
 

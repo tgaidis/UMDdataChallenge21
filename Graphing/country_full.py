@@ -12,10 +12,12 @@ import matplotlib.cbook as cbook
 from matplotlib import ticker
 import datetime as dt
 
-'''This program will create several line graphs of a countrys indicators.
-To run, you must already have the CSV file for the country.
-Simply type in the terminal:
-python3 create_graphics.py "Country"
+'''This program will create 9 graphs for the 9 indicators we have chosen based on
+the single country specified.
+
+IN ORDER TO RUN:
+You must specify a single country in the terminal, and have all necessary files.
+"python3 country_full.py "Country"
 '''
 
 df1 = pd.read_csv("countries/"+sys.argv[1]+".csv")

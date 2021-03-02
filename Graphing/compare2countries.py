@@ -17,7 +17,7 @@ Each graph will include a line graph of the two countries specified in the termi
 The first country will be orange and the second will be blue.
 IN ORDER TO RUN:
 You must specify two countries in the terminal, and have all necessary files.
-"python3 compare_countries_graphics.py "Country1" "Country2"
+"python3 compare2countries.py "Country1" "Country2"
 '''
 
 

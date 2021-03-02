@@ -11,6 +11,7 @@ import numpy as np; np.random.seed(1)
 '''This program gets all the data of a specific country from May 1st to the present.
 In order to run this program you must have already ran "get_all_indicator_data.py" 
 which would have created all the necessary CSV files for this program to work'''
+
 countries = [
     "Austria",
     "Belgium",

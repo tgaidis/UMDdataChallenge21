@@ -13,6 +13,7 @@ Make sure to change the date to May 1st if you dont have the files yet. Once you
 have it all, each time you want to update it set the date to the last entry received 
 to only append new entries.
 """
+
 def link_builder(indicator, fil, s_year, s_month, s_day):
     with open("indicators/"+fil, "a", newline='') as output_file:
         url = "https://covidmap.umd.edu/api/resources?indicator=" + indicator + "&type=daily&country=all&date="

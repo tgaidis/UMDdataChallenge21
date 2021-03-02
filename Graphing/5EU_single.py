@@ -12,9 +12,12 @@ import matplotlib.cbook as cbook
 from matplotlib import ticker
 import datetime as dt
 
-'''This program will create one graph comparing a chosen indicator and the two chosen countries. 
+'''This program will create a single graph comparing an indicator across the 5 chosen countries. 
+
 IN ORDER TO RUN:
-You must specify two countries in the terminal and a specific indicator, and have all necessary files.
+Have all necessary files from get_all_indicator_data.py and get_all_country_data.py
+
+"python3 5EU_single.py "Indicator"
 '''
 
 
